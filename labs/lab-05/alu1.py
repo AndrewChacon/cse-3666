@@ -46,7 +46,8 @@ def ALU1bit(a, b, carryin, binvert, operation, result, carryout):
         # Remember to use mux1_out.next = ...
         if binvert == 0:
             mux1_out.next = b
-        else: mux1_out.next = not b
+        elif binvert == 1: 
+            mux1_out.next = not b
 
     # the AND gate
     @always_comb
@@ -70,7 +71,7 @@ def ALU1bit(a, b, carryin, binvert, operation, result, carryout):
 
     # 4-1 mux to generate result
     @always_comb
-    def comb_mux_4_1():
+    def comb_mux_4_1(): # 0 = and, 1 = or, 2 = add, else  -> output
         # Use if-elif-else. Remember to do "result.next = ..."
         if operation == 0:
             result.next = and_out
